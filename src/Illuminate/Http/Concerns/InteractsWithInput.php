@@ -174,6 +174,36 @@ trait InteractsWithInput
     }
 
     /**
+     * Get all input keys.
+     *
+     * @return array
+     */
+    public function keys()
+    {
+        return array_keys($this->all());
+    }
+
+    /**
+     * Get the number of items in the input data.
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->all());
+    }
+
+    /**
+     * Determine if the input data is empty.
+     *
+     * @return bool
+     */
+    public function isEmpty()
+    {
+        return empty($this->all());
+    }
+
+    /**
      * Intersect an array of items with the input data.
      *
      * @param  array|mixed  $keys

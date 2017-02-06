@@ -261,6 +261,27 @@ class HttpRequestTest extends TestCase
         $this->assertEquals([], $request->except('age', 'name'));
     }
 
+    public function testKeysMethod()
+    {
+        $request = Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 25]);
+        $this->assertEquals(['name', 'age'], $request->keys());
+    }
+
+    public function testCountMethod()
+    {
+        $request = Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 25]);
+        $this->assertEquals(2, $request->count());
+    }
+
+    public function testIsEmptyMethod()
+    {
+        $request = Request::create('/', 'GET', ['name' => 'Taylor', 'age' => 25]);
+        $this->assertFalse($request->isEmpty());
+
+        $request = Request::create('/', 'GET', []);
+        $this->assertTrue($request->isEmpty());
+    }
+
     public function testIntersectMethod()
     {
         $request = Request::create('/', 'GET', ['name' => 'Taylor', 'age' => null]);

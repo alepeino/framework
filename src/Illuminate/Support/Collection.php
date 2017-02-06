@@ -12,10 +12,11 @@ use JsonSerializable;
 use IteratorAggregate;
 use InvalidArgumentException;
 use Illuminate\Support\Traits\Macroable;
-use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Bag;
+use Illuminate\Contracts\Support\Jsonable;
 
-class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate, Jsonable, JsonSerializable
+class Collection implements ArrayAccess, Arrayable, Bag, Countable, IteratorAggregate, Jsonable, JsonSerializable
 {
     use Macroable;
 
@@ -887,6 +888,18 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
         $this->offsetSet($key, $value);
 
         return $this;
+    }
+
+    /**
+     * Alias for the "put" method.
+     *
+     * @param  string  $key
+     * @param  string  $value
+     * @return $this
+     */
+    public function add($key, $value)
+    {
+        return $this->put($key, $value);
     }
 
     /**

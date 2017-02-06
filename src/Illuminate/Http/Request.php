@@ -4,6 +4,7 @@ namespace Illuminate\Http;
 
 use Closure;
 use ArrayAccess;
+use Illuminate\Contracts\Support\Bag;
 use RuntimeException;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -12,7 +13,7 @@ use Illuminate\Contracts\Support\Arrayable;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 
-class Request extends SymfonyRequest implements Arrayable, ArrayAccess
+class Request extends SymfonyRequest implements Arrayable, ArrayAccess, Bag
 {
     use Concerns\InteractsWithContentTypes,
         Concerns\InteractsWithFlashData,
@@ -263,10 +264,10 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
     /**
      * Merge new input into the current request's input array.
      *
-     * @param  array  $input
+     * @param  mixed  $input
      * @return void
      */
-    public function merge(array $input)
+    public function merge($input)
     {
         $this->getInputSource()->add($input);
     }
